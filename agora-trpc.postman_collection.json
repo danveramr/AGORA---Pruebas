@@ -1,0 +1,370 @@
+{
+  "info": {
+    "name": "AGORA tRPC API",
+    "description": "Colección de ejemplo para pruebas manuales de procedimientos tRPC de AGORA. Las llamadas reales usan el transporte HTTP estándar de tRPC v11 con el endpoint /api/trpc y el cliente httpBatchLink.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3000" },
+    { "key": "userEmail", "value": "test@alumno.ipn.mx" },
+    { "key": "userPassword", "value": "Test1234!" },
+    { "key": "agentId", "value": "software-developer" },
+    { "key": "meetingId", "value": "meeting_123" },
+    { "key": "meetingName", "value": "Prueba manual AGORA" },
+    { "key": "termId", "value": "term_123" },
+    { "key": "dictionaryEntryId", "value": "dict_123" },
+    { "key": "correctionId", "value": "correction_123" }
+  ],
+  "item": [
+    {
+      "name": "Auth (Better Auth)",
+      "item": [
+        {
+          "name": "signIn.email",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{userEmail}}\",\n  \"password\": \"{{userPassword}}\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/auth/sign-in/email", "host": ["{{baseUrl}}"], "path": ["api", "auth", "sign-in", "email"] }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "agents",
+      "item": [
+        {
+          "name": "agents.getMany",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"input\": {}\n}" },
+            "url": { "raw": "{{baseUrl}}/api/trpc/agents.getMany", "host": ["{{baseUrl}}"], "path": ["api", "trpc", "agents.getMany"] }
+          },
+          "response": []
+        },
+        {
+          "name": "agents.getOne",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"input\": {\n    \"id\": \"{{agentId}}\"\n  }\n}" },
+            "url": { "raw": "{{baseUrl}}/api/trpc/agents.getOne", "host": ["{{baseUrl}}"], "path": ["api", "trpc", "agents.getOne"] }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "meetings",
+      "item": [
+        {
+          "name": "meetings.getStats",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"input\": {}\n}" },
+            "url": { "raw": "{{baseUrl}}/api/trpc/meetings.getStats", "host": ["{{baseUrl}}"], "path": ["api", "trpc", "meetings.getStats"] }
+          },
+          "response": []
+        },
+        {
+          "name": "meetings.generateChatToken",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"input\": {}\n}" },
+            "url": { "raw": "{{baseUrl}}/api/trpc/meetings.generateChatToken", "host": ["{{baseUrl}}"], "path": ["api", "trpc", "meetings.generateChatToken"] }
+          },
+          "response": []
+        },
+        {
+          "name": "meetings.getTranscript",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"input\": {\n    \"id\": \"{{meetingId}}\"\n  }\n}" },
+            "url": { "raw": "{{baseUrl}}/api/trpc/meetings.getTranscript", "host": ["{{baseUrl}}"], "path": ["api", "trpc", "meetings.getTranscript"] }
+          },
+          "response": []
+        },
+        {
+          "name": "meetings.create",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"input\": {\n    \"name\": \"{{meetingName}}\",\n    \"agentId\": \"{{agentId}}\"\n  }\n}" },
+            "url": { "raw": "{{baseUrl}}/api/trpc/meetings.create", "host": ["{{baseUrl}}"], "path": ["api", "trpc", "meetings.create"] }
+          },
+          "response": []
+        },
+        {
+          "name": "meetings.getOne",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"input\": {\n    \"id\": \"{{meetingId}}\"\n  }\n}" },
+            "url": { "raw": "{{baseUrl}}/api/trpc/meetings.getOne", "host": ["{{baseUrl}}"], "path": ["api", "trpc", "meetings.getOne"] }
+          },
+          "response": []
+        },
+        {
+          "name": "meetings.getMany",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"input\": {\n    \"page\": 1,\n    \"pageSize\": 10,\n    \"search\": \"\",\n    \"status\": \"upcoming\"\n  }\n}" },
+            "url": { "raw": "{{baseUrl}}/api/trpc/meetings.getMany", "host": ["{{baseUrl}}"], "path": ["api", "trpc", "meetings.getMany"] }
+          },
+          "response": []
+        },
+        {
+          "name": "meetings.startMeeting",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"input\": {\n    \"id\": \"{{meetingId}}\"\n  }\n}" },
+            "url": { "raw": "{{baseUrl}}/api/trpc/meetings.startMeeting", "host": ["{{baseUrl}}"], "path": ["api", "trpc", "meetings.startMeeting"] }
+          },
+          "response": []
+        },
+        {
+          "name": "meetings.endMeeting",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"input\": {\n    \"id\": \"{{meetingId}}\",\n    \"transcript\": \"[{\\\"speaker_id\\\":\\\"user\\\",\\\"type\\\":\\\"text\\\",\\\"text\\\":\\\"Hello, I am a software engineer.\\\",\\\"start_ts\\\":0,\\\"stop_ts\\\":5}]\"\n  }\n}" },
+            "url": { "raw": "{{baseUrl}}/api/trpc/meetings.endMeeting", "host": ["{{baseUrl}}"], "path": ["api", "trpc", "meetings.endMeeting"] }
+          },
+          "response": []
+        },
+        {
+          "name": "meetings.update",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"input\": {\n    \"id\": \"{{meetingId}}\",\n    \"name\": \"{{meetingName}} actualizado\",\n    \"agentId\": \"{{agentId}}\"\n  }\n}" },
+            "url": { "raw": "{{baseUrl}}/api/trpc/meetings.update", "host": ["{{baseUrl}}"], "path": ["api", "trpc", "meetings.update"] }
+          },
+          "response": []
+        },
+        {
+          "name": "meetings.remove",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"input\": {\n    \"id\": \"{{meetingId}}\"\n  }\n}" },
+            "url": { "raw": "{{baseUrl}}/api/trpc/meetings.remove", "host": ["{{baseUrl}}"], "path": ["api", "trpc", "meetings.remove"] }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "corrections",
+      "item": [
+        {
+          "name": "corrections.getMany",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"input\": {\n    \"type\": \"grammar\"\n  }\n}" },
+            "url": { "raw": "{{baseUrl}}/api/trpc/corrections.getMany", "host": ["{{baseUrl}}"], "path": ["api", "trpc", "corrections.getMany"] }
+          },
+          "response": []
+        },
+        {
+          "name": "corrections.remove",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"input\": {\n    \"id\": \"{{correctionId}}\"\n  }\n}" },
+            "url": { "raw": "{{baseUrl}}/api/trpc/corrections.remove", "host": ["{{baseUrl}}"], "path": ["api", "trpc", "corrections.remove"] }
+          },
+          "response": []
+        },
+        {
+          "name": "corrections.removeAll",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"input\": {\n    \"type\": \"grammar\"\n  }\n}" },
+            "url": { "raw": "{{baseUrl}}/api/trpc/corrections.removeAll", "host": ["{{baseUrl}}"], "path": ["api", "trpc", "corrections.removeAll"] }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "glossary",
+      "item": [
+        {
+          "name": "glossary.getMany",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"input\": {}\n}" },
+            "url": { "raw": "{{baseUrl}}/api/trpc/glossary.getMany", "host": ["{{baseUrl}}"], "path": ["api", "trpc", "glossary.getMany"] }
+          },
+          "response": []
+        },
+        {
+          "name": "glossary.create",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"input\": {\n    \"term\": \"resilience\",\n    \"definition\": \"Capacidad para adaptarse y recuperarse ante dificultades.\"\n  }\n}" },
+            "url": { "raw": "{{baseUrl}}/api/trpc/glossary.create", "host": ["{{baseUrl}}"], "path": ["api", "trpc", "glossary.create"] }
+          },
+          "response": []
+        },
+        {
+          "name": "glossary.remove",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"input\": {\n    \"id\": \"{{termId}}\"\n  }\n}" },
+            "url": { "raw": "{{baseUrl}}/api/trpc/glossary.remove", "host": ["{{baseUrl}}"], "path": ["api", "trpc", "glossary.remove"] }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "dictionary",
+      "item": [
+        {
+          "name": "dictionary.getMany",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"input\": {}\n}" },
+            "url": { "raw": "{{baseUrl}}/api/trpc/dictionary.getMany", "host": ["{{baseUrl}}"], "path": ["api", "trpc", "dictionary.getMany"] }
+          },
+          "response": []
+        },
+        {
+          "name": "dictionary.create",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"input\": {\n    \"word\": \"resilience\",\n    \"definition\": \"capacidad para adaptarse y recuperarse\",\n    \"partOfSpeech\": \"noun\",\n    \"phonetic\": \"/rɪˈzɪliəns/\",\n    \"language\": \"en\"\n  }\n}" },
+            "url": { "raw": "{{baseUrl}}/api/trpc/dictionary.create", "host": ["{{baseUrl}}"], "path": ["api", "trpc", "dictionary.create"] }
+          },
+          "response": []
+        },
+        {
+          "name": "dictionary.remove",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"input\": {\n    \"id\": \"{{dictionaryEntryId}}\"\n  }\n}" },
+            "url": { "raw": "{{baseUrl}}/api/trpc/dictionary.remove", "host": ["{{baseUrl}}"], "path": ["api", "trpc", "dictionary.remove"] }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "gamification",
+      "item": [
+        {
+          "name": "gamification.getStats",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"input\": {}\n}" },
+            "url": { "raw": "{{baseUrl}}/api/trpc/gamification.getStats", "host": ["{{baseUrl}}"], "path": ["api", "trpc", "gamification.getStats"] }
+          },
+          "response": []
+        },
+        {
+          "name": "gamification.getAchievements",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"input\": {}\n}" },
+            "url": { "raw": "{{baseUrl}}/api/trpc/gamification.getAchievements", "host": ["{{baseUrl}}"], "path": ["api", "trpc", "gamification.getAchievements"] }
+          },
+          "response": []
+        },
+        {
+          "name": "gamification.getUnseen",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"input\": {}\n}" },
+            "url": { "raw": "{{baseUrl}}/api/trpc/gamification.getUnseen", "host": ["{{baseUrl}}"], "path": ["api", "trpc", "gamification.getUnseen"] }
+          },
+          "response": []
+        },
+        {
+          "name": "gamification.markAllSeen",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"input\": {}\n}" },
+            "url": { "raw": "{{baseUrl}}/api/trpc/gamification.markAllSeen", "host": ["{{baseUrl}}"], "path": ["api", "trpc", "gamification.markAllSeen"] }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
